@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <form action="/" method="get">
+        <input type="submit" name="action" value="Login">
+        <input type="submit" name="action" value="Sign In">
+    </form>
+    
+    <% if (action === "Login") { %>
+        <%- include('login') %>
+    <% }else if (action === "Sign In") { %>
+        <%- include('signin') %>
+    <% } %>
+    
+
+</body>
+</html>
