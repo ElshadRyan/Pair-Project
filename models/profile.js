@@ -11,16 +11,46 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
-      Profile.belongsTo(models.User, {foreignKey: "ProfileId"})
+      Profile.belongsTo(models.User, {foreignKey: "UserId"})
     }
   }
   Profile.init({
-    name: DataTypes.STRING,
-    description: DataTypes.STRING,
-    status: DataTypes.STRING
+    name: {
+      type: DataTypes.STRING,
+      allowNull: false,
+      validate: {
+        notNull: {
+          args: true,
+          msg: "nama gaboleh kosong yaaa"
+        },
+        notEmpty: {
+          args: true,
+          msg: "nama gaboleh kosong yaaa"
+        }
+      }
+    }, 
+    description: {
+      type: DataTypes.STRING,
+      allowNull: true
+    }, 
+    status: DataTypes.STRING,
+    UserId: DataTypes.INTEGER,
+    imageURL: {
+      type: DataTypes.STRING,
+      allowNull: true
+    }
   }, {
     sequelize,
     modelName: 'Profile',
   });
+
+  Profile.addHook("beforeCreate", (user, options) => {
+    if(user.imageURL === '')
+    {
+      user.imageURL = "https://media.istockphoto.com/id/1495088043/vector/user-profile-icon-avatar-or-person-icon-profile-picture-portrait-symbol-default-portrait.jpg?s=612x612&w=0&k=20&c=dhV2p1JwmloBTOaGAtaA3AW1KSnjsdMt7-U_3EZElZ0="
+    }
+
+    user.status = "Online"
+  })
   return Profile;
 };

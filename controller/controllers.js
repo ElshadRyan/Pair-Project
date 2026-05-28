@@ -1,14 +1,20 @@
 
-const {User} = require("../models/index")
+const { Error } = require("sequelize");
+const {User, Profile} = require("../models/index");
+const bcrypt = require("bcrypt")
 
 class Controllers{
     static async homePage(req,res)
     {
         try {
-            let {action} = req.query
-            res.render("home", {action})
+            let errors = []
+            let {action, error} = req.query
+            if(error)
+            {
+                errors = error.split(',')
+            }
+            res.render("home", {action, errors})
         } catch (error) {
-            console.log(error);
             res.send(error)
         }
     }
@@ -20,23 +26,30 @@ class Controllers{
             let {userName, password} = allInput
             //nanti dicocokan dengan database
             // inget ini mau nyocokin data sama username sama pw, ngecek login apakah ada apa ga, dan apakah udah login di tempat lain atau ga
-            let userData
-            if(!userData.dataValues.isLogin)
-            {
-                userData = await User.findAll({where: {
-                    userName: userName,
-                    password: password
-                }})
-                await User.Update(
-                    {isLogin: true}
-                    ,{where: {id: userData[0].dataValues.id}})
-            }
+            let userData = await User.findOne({where: {username: userName}})
             if(userData)
             {
-                if(userData.dataValues.isLogin)
+                if(bcrypt.compareSync(password, userData.password))
                 {
-                    res.redirect(`/${userData[0].dataValues.isLogin}`)
+                    req.session.role = userData.role
+                    req.session.userId = userData.id
+                    if(userData.role === "Admin")
+                    {
+                        res.redirect(`/admin/${userData.username}/${userData.id}`)
+                    }
+                    else
+                    {
+                        res.redirect(`/${userData.username}/${userData.id}`)
+                    }
                 }
+                else
+                {
+                    res.redirect("/?action=Login&error=Password/Username Salah")
+                }
+            }
+            else
+            {
+                res.redirect("/?action=Login&error=Password/Username Salah")
             }
 
         } catch (error) {
@@ -48,13 +61,53 @@ class Controllers{
     static async signin(req,res)
     {
         try {
+            let error = []
             let allInput = req.query
-            let {userName, email, password, confirmedPassword} = allInput
+            let {userName, email, password, Reveral, Role} = allInput
             //dicocokan dengan database nanti
-            
-            res.redirect("/createProfile")
+            let newUser = await User.create({
+                username: userName,
+                email: email,
+                password: password,
+                Reveral: Reveral,
+                role: Role
+            })
+            req.session.createNewAccount = newUser.id
+            res.redirect(`/${newUser.id}/create-profile`)
         } catch (error) {
-            console.log(error);
+            if(error.name === "SequelizeBaseError")
+            {   
+                res.redirect(`/?action=Sign In&error=${error.message}`)
+            }
+            else if(error.name === "SequelizeValidationError")
+            {
+                let errors = error.errors.map(data => {
+                    return data.message
+                })
+                res.redirect(`/?action=Sign In&error=${errors}`)
+            }
+            else
+            {
+                res.send(error)
+            }
+        }
+    }
+
+    static async logout(req,res)
+    {
+        try {
+            req.session.destroy((err) => {
+                if(err)
+                {
+                    console.log(err);
+                }
+                else
+                {
+                    res.redirect('/?action=Login')
+                }
+            })
+            
+        } catch (error) {
             res.send(error)
         }
     }
@@ -62,7 +115,14 @@ class Controllers{
     static async showCreateProfileForm(req,res)
     {
         try {
-            res.render("createProfile")
+            let errors = []
+            let id = req.params.id
+            let {error} = req.query
+            if(error)
+            {
+                errors = error.split(',')
+            }
+            res.render("createProfile", {id, errors})
         } catch (error) {
             res.send(error)
         }
@@ -71,8 +131,52 @@ class Controllers{
     static async createProfile(req,res)
     {
         try {
-            
+            let allInput = req.body
+            let id = req.params.id
+            let {profileName, description, imageURL} = allInput
+
+            let newProfile = await Profile.create({
+                name: profileName,
+                description: description,
+                imageURL: imageURL,
+                UserId: id
+            })
+
+            res.redirect("/")
+
         } catch (error) {
+            if(error.name === "SequelizeValidationError")
+            {
+                let id = req.params.id
+                let errors = error.errors.map(data => {
+                    return data.message
+                })
+                res.redirect(`/${id}/create-profile?error=${errors}`)
+            }
+            else
+            {
+                res.send(error)
+            }
+        }
+    }
+
+    static async adminHome(req,res)
+    {
+        try {
+            let id = req.params.id
+            let allData = await User.findOne({
+                include: [{model: Profile, require: true}, {model: User, require: true}],
+                where: {
+                    id: id
+                }
+            })
+            let profile = allData.dataValues.Profile
+            let users = allData.dataValues.Users
+
+            res.render("adminHomePage", {allData, profile, users})
+
+        } catch (error) {
+            console.log(error);
             res.send(error)
         }
     }
@@ -80,9 +184,11 @@ class Controllers{
     static async userHome(req,res)
     {
         try {
-            
+            res.render("userHomePage")
+
+
+
         } catch (error) {
-            console.log(error);
             res.send(error)
         }
     }

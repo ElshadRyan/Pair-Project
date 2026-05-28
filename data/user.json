@@ -6,7 +6,6 @@
     "username": "jane_dev",
     "password": "secure456",
     "email": "jane@example.com",
-    "ProfileId": 2,
     "role": "user",
     "Reveral": 1
   },
@@ -15,7 +14,6 @@
     "username": "mike_ui",
     "password": "design789",
     "email": "mike@example.com",
-    "ProfileId": 3,
     "role": "user",
     "Reveral": 1
   }

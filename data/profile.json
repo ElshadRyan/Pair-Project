@@ -3,18 +3,21 @@
     "id": 1,
     "name": "John Doe",
     "description": "Frontend Developer",
-    "status": "active"
+    "status": "active",
+    "UserId": 1
   },
   {
     "id": 2,
     "name": "Jane Smith",
     "description": "Backend Developer",
-    "status": "active"
+    "status": "active",
+    "UserId": 2
   },
   {
     "id": 3,
     "name": "Mike Johnson",
     "description": "UI/UX Designer",
-    "status": "inactive"
+    "status": "inactive",
+    "UserId": 3
   }
 ]

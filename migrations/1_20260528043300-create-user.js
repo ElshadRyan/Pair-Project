@@ -18,15 +18,6 @@ module.exports = {
       email: {
         type: Sequelize.STRING
       },
-      ProfileId: {
-        type: Sequelize.INTEGER,
-        references: {
-          model: 'Profiles',
-          key: 'id'
-        },
-        onUpdate: 'cascade',
-        onDelete: 'cascade'
-      },
       role: {
         type: Sequelize.STRING
       },

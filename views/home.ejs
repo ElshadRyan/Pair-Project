@@ -11,6 +11,12 @@
         <input type="submit" name="action" value="Sign In">
     </form>
     
+    <% if (errors.length !== 0) { %>
+     <% errors.forEach(element => { %>
+      <p style="color: red;"> <%= element %></p>
+     <% }) %>
+    <% } %>
+
     <% if (action === "Login") { %>
         <%- include('login') %>
     <% }else if (action === "Sign In") { %>

@@ -9,6 +9,7 @@
     "ansi-styles": "^6.2.3",
     "at-least-node": "^1.0.0",
     "balanced-match": "^1.0.2",
+    "bcrypt": "^6.0.0",
     "bcryptjs": "^3.0.3",
     "bluebird": "^3.7.2",
     "brace-expansion": "^2.1.1",

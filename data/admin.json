@@ -4,7 +4,6 @@
     "username": "john123",
     "password": "pass123",
     "email": "john@example.com",
-    "ProfileId": 1,
     "role": "admin",
     "Reveral": null
   }
