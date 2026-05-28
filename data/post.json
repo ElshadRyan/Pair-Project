@@ -1,0 +1,23 @@
+[
+  {
+    "id": 1,
+    "title": "My First Post",
+    "description": "This is my first post on the platform.",
+    "imageURL": "https://example.com/post1.jpg",
+    "userId": 1
+  },
+  {
+    "id": 2,
+    "title": "Backend Tips",
+    "description": "Sharing some backend best practices.",
+    "imageURL": "https://example.com/post2.jpg",
+    "userId": 2
+  },
+  {
+    "id": 3,
+    "title": "UI Inspiration",
+    "description": "Modern UI ideas for web apps.",
+    "imageURL": "https://example.com/post3.jpg",
+    "userId": 3
+  }
+]

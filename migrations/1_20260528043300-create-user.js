@@ -9,7 +9,7 @@ module.exports = {
         primaryKey: true,
         type: Sequelize.INTEGER
       },
-      userName: {
+      username: {
         type: Sequelize.STRING
       },
       password: {
@@ -18,19 +18,13 @@ module.exports = {
       email: {
         type: Sequelize.STRING
       },
-      ProfileId: {
-        type: Sequelize.INTEGER,
-        references: {
-          model: 'Profiles',
-          key: 'id'
-        },
-        onUpdate: 'cascade',
-        onDelete: 'cascade'
+      role: {
+        type: Sequelize.STRING
       },
-      AdminId: {
+      Reveral: {
         type: Sequelize.INTEGER,
         references: {
-          model: 'Admins',
+          model: 'Users',
           key: 'id'
         },
         onUpdate: 'cascade',
