@@ -15,11 +15,23 @@ module.exports = {
     */
       let allData = await fs.promises.readFile("./data/user.json", "utf-8")
       allData = JSON.parse(allData)
+
+      let adminData = await fs.promises.readFile("./data/admin.json", "utf-8")
+      adminData = JSON.parse(adminData)
+
       allData.forEach(element => {
         delete element.id
         element.createdAt = new Date()
         element.updatedAt = new Date()
       });
+
+      adminData.forEach(element => {
+        delete element.id
+        element.createdAt = new Date()
+        element.updatedAt = new Date()        
+      })
+
+      await queryInterface.bulkInsert("Users", adminData, {})
 
       await queryInterface.bulkInsert("Users", allData, {})
 

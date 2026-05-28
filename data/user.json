@@ -1,31 +1,23 @@
 
 [
-  {
-    "id": 1,
-    "username": "john123",
-    "password": "pass123",
-    "email": "john@example.com",
-    "profileId": 1,
-    "role": "admin",
-    "referral": 1001
-  },
+  
   {
     "id": 2,
     "username": "jane_dev",
     "password": "secure456",
     "email": "jane@example.com",
-    "profileId": 2,
+    "ProfileId": 2,
     "role": "user",
-    "referral": 1002
+    "Reveral": 1
   },
   {
     "id": 3,
     "username": "mike_ui",
     "password": "design789",
     "email": "mike@example.com",
-    "profileId": 3,
+    "ProfileId": 3,
     "role": "user",
-    "referral": 1003
+    "Reveral": 1
   }
 ]
 

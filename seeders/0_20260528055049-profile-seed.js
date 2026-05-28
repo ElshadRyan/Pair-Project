@@ -1,4 +1,6 @@
 'use strict';
+const fs = require('fs')
+
 
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
@@ -13,7 +15,7 @@ module.exports = {
      * }], {});
     */
 
-    let allData = await fs.promises.readFile("./profile/user.json", "utf-8")
+    let allData = await fs.promises.readFile("./data/profile.json", "utf-8")
     allData = JSON.parse(allData)
     allData.forEach(element => {
       delete element.id
