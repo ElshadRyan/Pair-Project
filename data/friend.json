@@ -1,0 +1,17 @@
+[
+  {
+    "id": 1,
+    "UserId": 1,
+    "FriendId": 2
+  },
+  {
+    "id": 2,
+    "UserId": 1,
+    "FriendId": 3
+  },
+  {
+    "id": 3,
+    "UserId": 2,
+    "FriendId": 3
+  }
+]

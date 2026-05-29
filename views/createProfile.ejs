@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+
+    <% if (errors.length !== 0) { %>
+     <% errors.forEach(element => { %>
+      <p style="color: red;"> <%= element %></p>
+     <% }) %>
+    <% } %>
+
+    <form action="/<%= id %>/create-profile" method="post">
+        <label for="">name</label>
+        <input type="text" name="profileName" id=""><br>
+        <label for="">profile description</label>
+        <input type="text" name="description" id=""><br>
+        <label for="">profile pict URL</label>
+        <input type="text" name="imageURL" id=""><br>
+        <input type="submit" value="Create">
+    </form> 
+</body>
+</html>

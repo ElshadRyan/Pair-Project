@@ -1,0 +1,50 @@
+<%- include('_userHeader.ejs') %>
+
+<div class="d-flex justify-content-between align-items-center mb-4">
+
+    <h3 class="mb-0">Posts</h3>
+
+    <% if (admin.id) { %>
+        <a class="btn btn-warning btn-sm"
+           href="/admin/<%= admin.username %>/<%= admin.id %>">
+            Switch to Admin Mode
+        </a>
+    <% } %>
+
+</div>
+
+<div class="row g-4">
+
+    <% posts.forEach(post => { %>
+
+        <div class="col-md-4">
+
+            <div class="card shadow-sm h-100">
+
+                <img 
+                    src="<%= post.dataValues.imageURL %>" 
+                    class="card-img-top"
+                    style="height: 200px; object-fit: cover;"
+                >
+
+                <div class="card-body">
+
+                    <h5 class="card-title">
+                        <%= post.dataValues.title %>
+                    </h5>
+
+                    <p class="card-text text-muted">
+                        <%= post.dataValues.description %>
+                    </p>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    <% }) %>
+
+</div>
+
+<%- include('_userFooter.ejs') %>

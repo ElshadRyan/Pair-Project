@@ -1,0 +1,62 @@
+<%- include('_userHeader.ejs') %>
+
+<div class="container mt-5" style="max-width: 600px;">
+
+    <div class="card shadow-sm">
+
+        <div class="card-body">
+
+            <h3 class="mb-4 text-center">Create New Post</h3>
+
+            <form action="/<%= username %>/<%= id %>/add-post" method="post">
+
+                <!-- Title -->
+                <div class="mb-3">
+                    <label class="form-label">Title</label>
+                    <input 
+                        type="text" 
+                        name="title" 
+                        class="form-control"
+                        placeholder="Enter post title"
+                        required
+                    >
+                </div>
+
+                <!-- Description -->
+                <div class="mb-3">
+                    <label class="form-label">Description</label>
+                    <input 
+                        type="text" 
+                        name="description" 
+                        class="form-control"
+                        placeholder="Write something..."
+                        required
+                    >
+                </div>
+
+                <!-- Image URL -->
+                <div class="mb-3">
+                    <label class="form-label">Image URL</label>
+                    <input 
+                        type="text" 
+                        name="imageURL" 
+                        class="form-control"
+                        placeholder="Paste image link"
+                        required
+                    >
+                </div>
+
+                <!-- Submit -->
+                <button type="submit" class="btn btn-primary w-100">
+                    Publish Post
+                </button>
+
+            </form>
+
+        </div>
+
+    </div>
+
+</div>
+
+<%- include('_userFooter.ejs') %>
