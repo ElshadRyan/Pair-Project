@@ -1,0 +1,60 @@
+<%- include('_userHeader.ejs') %>
+
+<div class="container mt-4">
+
+    <!-- Header -->
+    <div class="d-flex justify-content-between align-items-center mb-3">
+
+        <h3>Your Friends</h3>
+
+        <a 
+            href="/<%= username %>/<%= id %>/add-friend"
+            class="btn btn-primary"
+        >
+            + Add Friend
+        </a>
+
+    </div>
+
+    <!-- Friends Grid -->
+    <div class="row g-3">
+
+        <% allFriends.forEach(friend => { %>
+
+            <div class="col-md-4">
+
+                <div class="card shadow-sm h-100">
+
+                    <img 
+                        src="<%= friend.dataValues.FriendUser.dataValues.Profile.dataValues.friendsProfileImage %>" 
+                        class="card-img-top"
+                        style="height: 200px; object-fit: cover;"
+                    >
+
+                    <div class="card-body">
+
+                        <h5 class="card-title">
+                            <%= friend.dataValues.FriendUser.dataValues.Profile.dataValues.friendsName %>
+                        </h5>
+
+                        <p class="card-text text-muted">
+                            <%= friend.dataValues.FriendUser.dataValues.Profile.dataValues.friendsBio %>
+                        </p>
+
+                        <p class="small text-secondary">
+                            ID: <%= friend.dataValues.FriendUser.dataValues.friendsId %>
+                        </p>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        <% }) %>
+
+    </div>
+
+</div>
+
+<%- include('_userFooter.ejs') %>

@@ -14,11 +14,11 @@ module.exports = (sequelize, DataTypes) => {
     static associate(models) {
       // define association here
       User.hasMany(models.Post, {foreignKey: "UserId"})
-      User.hasOne(models.Profile, {foreignKey: "UserId"})
+      User.hasOne(models.Profile, {foreignKey: "UserId", as: "Profile"})
       User.hasMany(models.Friend, {foreignKey: "FriendId"})
-      User.hasMany(models.Friend, {foreignKey: "UserId"})
-      User.hasMany(models.User, {foreignKey: "Reveral"})
-      User.belongsTo(models.User, {foreignKey: "Reveral"})
+      User.hasMany(models.Friend, {foreignKey: "UserId", as: "AllFriends"})
+      User.hasMany(models.User, {foreignKey: "Reveral", as: "Reverals"})
+      User.belongsTo(models.User, {foreignKey: "Reveral", as: "Reverrer"})
     }
   }
   User.init({
@@ -33,7 +33,8 @@ module.exports = (sequelize, DataTypes) => {
         notEmpty: {
           args: true,
           msg: "username gaboleh kosong yaaa"
-        }
+        },
+          
       }
     }, 
     password: {
@@ -47,7 +48,16 @@ module.exports = (sequelize, DataTypes) => {
         notEmpty: {
           args: true,
           msg: "password gaboleh kosong yaaa"
-        }
+        },
+        noSpecialChars(value) {
+            const regex = /^[a-zA-Z0-9]+$/;
+            
+            if (regex.test(value)) {
+              throw new Error(
+                "harus ada special char"
+              );
+            }
+          },
       }
     },
     email: {

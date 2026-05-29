@@ -2,9 +2,17 @@
     <h1>Login Page</h1>
 
     <form action="/login" method="get">
-        <label for="">UserName</label>
-        <input type="text" name="userName" id=""><br>
-        <label for="">Password</label>
-        <input type="password" name="password" id=""> <br>
-        <input type="submit" value="login">
-    </form>
+
+                    <div class="mb-3">
+                        <label class="form-label">Username</label>
+                        <input type="text" name="userName" class="form-control" required>
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="form-label">Password</label>
+                        <input type="password" name="password" class="form-control" required>
+                    </div>
+
+                    <button class="btn btn-primary w-100" type="submit">Login</button>
+
+                </form>

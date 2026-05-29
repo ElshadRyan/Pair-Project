@@ -49,14 +49,7 @@ app.use(function (req, res, next) {
   }
   else
   {
-    if(req.session.role === "admin")
-    {
-      next()
-    }
-    else
-    {
-
-    }
+    next()
   }
 })
 
@@ -79,10 +72,51 @@ const isAdmin = function(req, res, next)
   } 
 }
 
+const canAccess = function(req, res, next)
+{
+  if(!req.session.role)
+  {
+    res.redirect('/?action=Login&error=Login dulu bre')
+  }
+  else
+  {
+    if(req.session.role === "Admin")
+    {
+      next()
+    }
+    else
+    {
+      if(req.session.userId === +req.params.id)
+      {
+        next()
+      }
+      else
+      {
+        res.redirect('/?action=Login&error=Login dulu bre')
+      }
+    }
+  }
+}
+
 
 app.get('/admin/:username/:id', isAdmin, Controllers.adminHome)
 
-app.get('/:adminid/:username/:id', Controllers.userHome)
+app.get('/:username/:id', canAccess, Controllers.userHome)
+
+app.get('/:username/:id/friends',canAccess, Controllers.friendsList)
+
+app.get('/:username/:id/add-post',canAccess, Controllers.showAddPostForm)
+
+app.post('/:username/:id/add-post',canAccess, Controllers.addPost)
+
+app.get('/:username/:id/my-post',canAccess, Controllers.myPost)
+
+app.get('/:username/:id/delete/:postId',canAccess, Controllers.deletePost)
+
+app.get('/:username/:id/add-friend',canAccess, Controllers.showAddFriendForm)
+
+app.get('/:username/:id/add-friend/add/:friendId',canAccess, Controllers.addFriends)
+
 
 app.listen(port, () => {
   console.log(`http://localhost:${port}`)

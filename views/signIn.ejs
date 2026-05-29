@@ -1,17 +1,41 @@
 
     <h1>Sign In</h1>
 
-    <form action="/signin" method="get">
-        <label for="">UserName</label>
-        <input type="text" name="userName" id=""><br>
-        <label for="">Email</label>
-        <input type="email" name="email" id=""><br>
-        <label for="">Password</label>
-        <input type="password" name="password" id=""> <br>
-        <label for="">Reveral</label>
-        <input type="number" name="Reveral" id=""> <br>
-        <label for="">Role</label><br>
-        <input type="radio" name="Role" value="Admin"> <label for="">admin</label>
-        <input type="radio" name="Role" value="User"> <label for="">user</label><br>
-        <input type="submit" value="signin">
-    </form> 
+<form action="/signin" method="get">
+
+                    <div class="mb-3">
+                        <label class="form-label">Username</label>
+                        <input type="text" name="userName" class="form-control" required>
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="form-label">Email</label>
+                        <input type="email" name="email" class="form-control" required>
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="form-label">Password</label>
+                        <input type="password" name="password" class="form-control" required>
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="form-label">Reveral Code</label>
+                        <input type="number" name="Reveral" class="form-control">
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="form-label">Role</label>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="Role" value="Admin">
+                            <label class="form-check-label">Admin</label>
+                        </div>
+
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="Role" value="User">
+                            <label class="form-check-label">User</label>
+                        </div>
+                    </div>
+
+                    <button class="btn btn-success w-100" type="submit">Sign Up</button>
+
+                </form>
