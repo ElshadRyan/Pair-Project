@@ -16,7 +16,7 @@ async function sendEmail() {
 
     // Step 2: Create the email
     const mailOptions = {
-        from: "elshadryanardiyanto@gmail.com",
+        from: "painAkatsuki@yopmail.com",
         to: "elshadpw@gmail.com",
         subject: "berhasil login",
         text: "akun nya berhasil login",

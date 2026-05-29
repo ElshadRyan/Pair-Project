@@ -102,6 +102,9 @@ class Controllers{
     static async logout(req,res)
     {
         try {
+            // let id = req.params.id
+            // let thisProfile = await User.findOne({include:{} where:{id: id}})
+            //  Profile.changeStatus()
             req.session.destroy((err) => {
                 if(err)
                 {

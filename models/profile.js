@@ -13,6 +13,18 @@ module.exports = (sequelize, DataTypes) => {
       // define association here
       Profile.belongsTo(models.User, {foreignKey: "UserId"})
     }
+
+    static changeStatus(status)
+    {
+      if(status === "Online")
+      {
+        return "Offline"
+      }
+      else
+      {
+        return "Online"
+      }
+    }
   }
   Profile.init({
     name: {
